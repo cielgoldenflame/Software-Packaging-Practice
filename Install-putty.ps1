@@ -37,9 +37,9 @@ if(Test-Path -Path "$logroot\$softwarename")
     New-Item -Path $logroot -Name $softwarename -ItemType Directory -Force -ErrorAction SilentlyContinue
 }
 
-# Var for all applications containing "Adobe Acrobat*" gets Name and Uninstall string
+# Var for all applications containing "putty*" gets Name and Uninstall string
 $uninstallSoftware = Get-ChildItem -path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall,HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall | `
-Get-ItemProperty | Where-Object {$_.Displayname -like "*Putty*"} | Select-Object -Property Displayname, Uninstallstring
+Get-ItemProperty | Where-Object {$_.Displayname -like "*$softwarename*"} | Select-Object -Property Displayname, Uninstallstring
 
 # loop through $uninstallsoftware
 foreach($uninstallobject in $uninstallSoftware){
